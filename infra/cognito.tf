@@ -55,3 +55,34 @@ resource "aws_cognito_user_pool" "pool" {
     configuration_set = aws_sesv2_configuration_set.existing_rules.configuration_set_name
   }
 }
+
+resource "aws_cognito_user_pool_client" "pool_client" {
+  name = "client"
+  user_pool_id = aws_cognito_user_pool.pool.id
+      
+  supported_identity_providers = ["COGNITO"] # eventually can allow for google etc.
+
+  # apps supported authentication flows
+  explicit_auth_flows = ["ALLOW_CUSTOM_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
+
+  # used in every api request in authorization header
+  access_token_validity = 60 # minutes
+  # duration for 6-digit code created for auth flow
+  auth_session_validity = 5 # minutes
+  # used to refresh access token
+  refresh_token_validity = 5 # days
+  # token used by frontend, contains basic user profile data
+  id_token_validity = 1 # hours
+
+  # prevents api responses that can aid in brute force attacks
+  prevent_user_existence_errors = "ENABLED"
+
+  # revoke refresh tokens for a user
+  # all access tokens issued by that refresh token are invalidated
+  enable_token_revocation = "ENABLED"
+
+  # not needed unless using cognito managed login pages
+  # allowed_oauth_flows_user_pool_client = true
+  # allowed_oauth_scopes = ["email", "openid", "profile"]
+
+}
