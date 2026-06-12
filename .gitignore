@@ -36,3 +36,35 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Log files
+*.log
+*.tflog
+
+# Local micro-directories / Provider binaries
+.terraform/
+
+# Hide all actual tfvars configuration files
+*.tfvars
+*.tfvars.json
+
+# Override: Allow sample/example files to show variables needed
+!*.tfvars.example
+
+# Ignore local state files (Use a remote backend like S3 instead)
+*.tfstate
+*.tfstate.*
+
+# Ignore crash dumps
+crash.log
+crash.*.log
+
+# Ignore sensitive override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files (like credentials)
+.terraformrc
+terraform.rc
