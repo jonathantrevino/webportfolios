@@ -11,5 +11,5 @@ output "cognito_user_pool_arn" {
 
 output "cognito_user_pool_client_id" {
   description = ""
-  value = aws_cognito_user_pool_client_id.client.client_id
+  value = aws_cognito_user_pool_client.pool_client.id
 }

@@ -2,8 +2,8 @@
 # data blocks are only used to reference it
 
 # configuration set
-data "aws_ses_v2_configuration_set" "existing_rules" {
-  configuration_set_name = "my_first_configuration_set"
+data "aws_sesv2_configuration_set" "existing_rules" {
+  configuration_set_name = "my-first-configuration-set"
 }
 
 # domain
